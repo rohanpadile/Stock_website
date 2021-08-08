@@ -1,0 +1,25 @@
+{% extends "layout.html" %}
+
+{% block title %}
+    Index
+{% endblock %}
+
+{% block main %}
+    <table class="table table-striped">
+                <tr>
+                    <th>Symbol</th> <th>Name</th> <th>Shares</th> <th>Price</th> <th>TOTAL</th>
+                </tr>
+            {% for data in stock_data %}
+                <tr>
+                    <td>{{ data['Symbol'] }}</td> <td>{{ data['Name'] }}</td> <td>{{ data['Shares'] }}</td>
+                    <td>${{ my_price_list[data['Symbol']] }}</td> <td>${{ '%0.2f' %(my_price_list[data['Symbol']] * data['Shares']) }}</td>
+                </tr>
+            {% endfor %}
+                <tr>
+                    <td>CASH</td> <td></td> <td></td> <td></td> <td>${{ '%0.2f' %user_cash }}</td>
+                </tr>
+                <tr>
+                    <td></td> <td></td> <td></td> <td></td> <td>${{ '%0.2f' %(user_cash + my_price_total) }}</td>
+                </tr>
+    </table>
+{% endblock %}
